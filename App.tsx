@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Screens
+import { LoginChoiceScreen } from "./src/screens/auth/LoginChoiceScreen";
 import { LoginScreen } from "./src/screens/auth/LoginScreen";
 
 // Navigators
@@ -14,12 +15,10 @@ const Stack = createNativeStackNavigator();
 function MainSwitcher({ route }) {
   const role = route.params?.role;
 
-  // 🔥 اختيار الواجهة حسب الدور
   if (role === "admin") {
     return <AdminNavigator />;
   }
 
-  // Default: customer
   return <AppNavigator />;
 }
 
@@ -28,14 +27,17 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-        {/* 🔐 Login */}
         <Stack.Screen 
-          name="Login" 
-          component={LoginScreen} 
+          name="Choice" 
+          component={LoginChoiceScreen} 
           options={{ headerShown: false }}
         />
 
-        {/* 🚀 Main App */}
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
+        />
+
         <Stack.Screen 
           name="Main" 
           component={MainSwitcher} 
